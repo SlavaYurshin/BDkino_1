@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% block title %}<title>kinoBD</title>{% endblock %}
+    <meta charset="utf-8" />
+	{% load bootstrap3 %}
+	<script src="{% bootstrap_jquery_url %}"></script>
+	{% bootstrap_javascript %}
+	{% bootstrap_css %}
+    <title>Модели в Django</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-2" align="right">
+                {% block sidebar %}
+                <ul class="sidebar-nav">
+                    {% if user.is_authenticated %}
+                        <a>User: {{ user.get_username }}</a></br>
+                        <a href="{% url 'logout'%}?next={{request.path}}">Logout</a></br>
+                    {% else %}
+                        <a href="{% url 'login'%}?next={{request.path}}">Login</a></li></br>
+                    {% endif %}
+                </ul>
+                {% endblock %}
+            </div>
+            <div class="col-sm-10 ">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</body>>
+</html>

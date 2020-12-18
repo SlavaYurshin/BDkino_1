@@ -1,0 +1,50 @@
+{% extends "base_generic.html" %}
+{% block content %}
+
+	{% if film.count > 0 %}
+		<h2>Список фильмов</h2>
+		<table class="table table-striped">
+			<tr>
+				<th>ID</th>
+				<th>Постер</th>
+				<th>Название</th>
+				<th>Режиссер</th>
+				<th>Актеры</th>
+				<th>Жанр</th>
+				<th>Страна</th>
+				<th>Отзывы</th>
+				<th></th>
+			</tr>
+			<!--{% for hotel in hotel_images %}
+				<tr>
+					{{ hotel.image_name }}
+						 <img src="{{ MEDIA_URL }}{{ hotel.image.url }}" class="img-responsive" style="width: 20%" />
+				</tr>
+			{% endfor %}-->
+			{% for f in film %}
+			<tr>
+				<td>{{ f.id }}</td>
+				{% for poster in poster_images %}
+					{% if f.id == poster.image_name_id %}
+						<td width="25%"><img src="{{ MEDIA_URL }}{{ poster.image.url}}" class="img-responsive" style="width: 50%" />{{poster.id}}{{poster.image_name}}</td>
+					{% endif %}
+
+				{% endfor %}
+
+				<td>{{ f.name_film }}, <br> Год выпуска: {{ f.film_year }} </td>
+				<td>{{ f.film_person_crate }} </td>
+
+
+				<td>{% for person in f.film_person.all %}{{ person }}<br>{% endfor %}</td>
+				<td>{% for genre in f.film_genre.all %}{{ genre }}<br/>{% endfor %}</td>
+				<td>{{ f.film_country }}</td>
+				<td><a href="select_Blog/{{ f.id }}">Перейти к отзывам</a></td>
+				<td><a href="delete_film/{{ f.id }}" target="_blank" >Удалить</a></td>
+				<td></td>
+			</tr>
+			{% endfor %}
+		</table>
+		<label><a href="test/">Список фильмов</a></label><br>
+		{% endif %}
+
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base_generic.html" %}
+{% block content %}
+<form method="POST" action="add_person/create/">
+    {% csrf_token %}
+    <p>
+        <label>Введите имя</label><br>
+        <input type="text" name="name" />
+    </p>
+    <p>
+        <label>Введите Фамилию</label><br>
+        <input type="text" name="last_name" />
+    </p>
+    <p>
+        <label>Введите возраст</label><br>
+        <input type="number" name="age" />
+    </p>
+    <input type="submit" value="Сохранить" >
+</form>
+{% endblock %}
